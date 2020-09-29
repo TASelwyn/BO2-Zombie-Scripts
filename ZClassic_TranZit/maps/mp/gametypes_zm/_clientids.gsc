@@ -47,29 +47,29 @@ spawnOnRoundOne() //force spawn player
 }
 giveAllPerks()
 {
-    if (isDefined(level.zombiemode_using_juggernaut_perk) && level.zombiemode_using_juggernaut_perk)
+    if (isDefined(level.zombiemode_using_juggernaut_perk) && level.zombiemode_using_juggernaut_perk) //Juggernaut
       self doGivePerk("specialty_armorvest");
-    if (isDefined(level.zombiemode_using_sleightofhand_perk) && level.zombiemode_using_sleightofhand_perk)
+    if (isDefined(level.zombiemode_using_sleightofhand_perk) && level.zombiemode_using_sleightofhand_perk) //Speed Cola
       self doGivePerk("specialty_fastreload");
-    if (isDefined(level.zombiemode_using_revive_perk) && level.zombiemode_using_revive_perk)
+    if (isDefined(level.zombiemode_using_revive_perk) && level.zombiemode_using_revive_perk) //Quick Revive
        self doGivePerk("specialty_quickrevive");
-    if (isDefined(level.zombiemode_using_doubletap_perk) && level.zombiemode_using_doubletap_perk) 
+    if (isDefined(level.zombiemode_using_doubletap_perk) && level.zombiemode_using_doubletap_perk) //Double Tap
        self doGivePerk("specialty_rof");
-    if (isDefined(level.zombiemode_using_marathon_perk) && level.zombiemode_using_marathon_perk)
+    if (isDefined(level.zombiemode_using_marathon_perk) && level.zombiemode_using_marathon_perk) //Stamin Up
         self doGivePerk("specialty_longersprint");
-    if(isDefined(level.zombiemode_using_additionalprimaryweapon_perk) && level.zombiemode_using_additionalprimaryweapon_perk)
+    if(isDefined(level.zombiemode_using_additionalprimaryweapon_perk) && level.zombiemode_using_additionalprimaryweapon_perk) //Mule Kick
         self doGivePerk("specialty_additionalprimaryweapon");
-    if (isDefined(level.zombiemode_using_deadshot_perk) && level.zombiemode_using_deadshot_perk)
+    if (isDefined(level.zombiemode_using_deadshot_perk) && level.zombiemode_using_deadshot_perk) //Deadshot Daquiri
         self doGivePerk("specialty_deadshot");
-    if (isDefined(level.zombiemode_using_tombstone_perk) && level.zombiemode_using_tombstone_perk)
+    if (isDefined(level.zombiemode_using_tombstone_perk) && level.zombiemode_using_tombstone_perk) //Vulture Aid?
         self doGivePerk("specialty_scavenger");
-    if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_flakjacket"]) && (level.script != "zm_buried"))
+    if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_flakjacket"]) && (level.script != "zm_buried")) //?
         self doGivePerk("specialty_flakjacket");
-    if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_nomotionsensor"]))
+    if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_nomotionsensor"])) //?
         self doGivePerk("specialty_nomotionsensor");
-    if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_grenadepulldeath"]))
+    if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_grenadepulldeath"])) //?
         self doGivePerk("specialty_grenadepulldeath");
-    if (isDefined(level.zombiemode_using_chugabud_perk) && level.zombiemode_using_chugabud_perk)
+    if (isDefined(level.zombiemode_using_chugabud_perk) && level.zombiemode_using_chugabud_perk) //?
         self doGivePerk("specialty_finalstand");
     self iprintln("All Perks ^2Gived");
 }
