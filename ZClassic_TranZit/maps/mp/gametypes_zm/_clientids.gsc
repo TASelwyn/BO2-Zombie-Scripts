@@ -31,7 +31,7 @@ onplayerspawned()
 	for (;;)
 	{
 		self waittill( "spawned_player" );
-		self thread welcome();
+        self thread welcome();
 	}
 }
 
@@ -63,6 +63,7 @@ giveAllPerks()
         self doGivePerk("specialty_deadshot");
     if (isDefined(level.zombiemode_using_tombstone_perk) && level.zombiemode_using_tombstone_perk) //Vulture Aid?
         self doGivePerk("specialty_scavenger");
+    /* Multiplayer perks? ig lol
     if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_flakjacket"]) && (level.script != "zm_buried")) //?
         self doGivePerk("specialty_flakjacket");
     if (isDefined(level._custom_perks) && isDefined(level._custom_perks["specialty_nomotionsensor"])) //?
@@ -71,7 +72,9 @@ giveAllPerks()
         self doGivePerk("specialty_grenadepulldeath");
     if (isDefined(level.zombiemode_using_chugabud_perk) && level.zombiemode_using_chugabud_perk) //?
         self doGivePerk("specialty_finalstand");
-    self iprintln("All Perks ^2Gived");
+    */
+    self iprintln("All Perks ^2Given");
+    
 }
 doGivePerk(perk)
 {
@@ -160,7 +163,8 @@ setLoadout()
     {
         self giveweapon( "tazer_knuckles_zm" );
         self giveWeapon( "hamr_upgraded_zm" );
-        self maps/mp/zombies/_zm_perks::give_perk( "specialty_armorvest" );
+        //self maps/mp/zombies/_zm_perks::give_perk( "specialty_armorvest" );
+        self giveAllPerks();
         self.score = 25000;
     }
 }
@@ -169,3 +173,4 @@ setJuggernaut()
 	if (isDefined(level.zombiemode_using_juggernaut_perk) && level.zombiemode_using_juggernaut_perk)
 		self doGivePerk("specialty_armorvest");
 }
+//thomas is a cunt
