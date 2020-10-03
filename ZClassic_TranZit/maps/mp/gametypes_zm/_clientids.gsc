@@ -4,19 +4,17 @@
 #include maps/mp/gametypes_zm/_hud_message;
 #include maps/mp/zombies/_zm;
 #include maps/mp/zombies/_zm_utility;
-
 init()
 {
 	// Perk Limit
-	//level.perk_purchase_limit = 9;
-	
+	level.perk_purchase_limit = 9;
 	level thread onplayerconnect();
 }
-
 onplayerconnect()
 {
 	level endon( "end_game" );
 	self endon( "disconnect" );
+	self.isNewPlayer = true;
 	
 	for (;;)
 	{
@@ -25,7 +23,6 @@ onplayerconnect()
 		player thread spawnOnRoundOne();
 	}
 }
-
 onplayerspawned() 
 {
 	for (;;)
@@ -34,7 +31,6 @@ onplayerspawned()
 		self thread welcome();
 	}
 }
-
 spawnOnRoundOne() //force spawn player
 {
 	wait 3; //waits for blackscreen to load
@@ -73,8 +69,7 @@ giveAllPerks()
 	if (isDefined(level.zombiemode_using_chugabud_perk) && level.zombiemode_using_chugabud_perk) //?
 		self doGivePerk("specialty_finalstand");
 	*/
-	self iprintln("All Perks ^2Given");
-	
+	//self iprintln("All Perks ^2Given"); removed due to print in doGivePerk() being added
 }
 doGivePerk(perk)
 {
@@ -87,11 +82,10 @@ doGivePerk(perk)
 		gun = self maps/mp/zombies/_zm_perks::perk_give_bottle_begin(perk);
 		evt = self waittill_any_return("fake_death", "death", "player_downed", "weapon_change_complete");
 			if (evt == "weapon_change_complete")
-				self thread maps/mp/zombies/_zm_perks::wait_give_perk(perk, 1);
+			    self thread maps/mp/zombies/_zm_perks::wait_give_perk(perk, 1);
 				self maps/mp/zombies/_zm_perks::perk_give_bottle_end(gun, perk);
 			if (self maps/mp/zombies/_zm_laststand::player_is_in_laststand() || isDefined(self.intermission) && self.intermission)
 				return;
-			
 			self notify("burp");
 		}
 }
@@ -113,60 +107,56 @@ setBoxCost()
 }
 setSpeed()
 {
-	//if ( self.name == "ThomasDevil" )
 	if ( self.name == "ThomasDevil" || "VictorAngel" || "RobertGG" )
 	{
-		self setmovespeedscale(1.1); // pretty sure 1.25 works
+		self setmovespeedscale(1.1);
 	}
 }
 setLoadout()
 {
-
+//Runs twice for any player that joins after the first 4weird
 	// Speed And Jugg
 	setSpeed();
 	setJuggernaut();
-	
 	// Give starting weaponry
 	self giveweapon( "knife_zm" );
 	self give_start_weapon( 1 );
-	
-	// Give misc
-	self.score = 750;
-	
-	self iprintln("setLoadout() executed");
-	
+    if ( self.isNewPlayer )
+	{
+        if ( level.round_number != 1 )
+        {
+		    self.score = level.round_number * 1000;
+		} 
+		else 
+		{
+		    self.score = 750;
+		}
+	}
 	if ( level.round_number >= 5 && level.round_number < 10)
 	{
  		self giveWeapon( "fiveseven_zm" );
-		self.score = 5000;
+		//self.score = 5000;
 	}
 	else if ( level.round_number >= 10 && level.round_number < 15)
 	{
 		self giveweapon( "tazer_knuckles_zm" );
 		self giveWeapon( "ak74u_zm" );
-		self.score = 10000;
 	}
 	else if ( level.round_number >= 15 && level.round_number < 20)
 	{
 		self giveweapon( "tazer_knuckles_zm" );
 		self giveWeapon( "srm1216_upgraded_zm" );
-		self maps/mp/zombies/_zm_perks::give_perk( "specialty_armorvest" );
-		self.score = 15000;
 	}
 	else if ( level.round_number >= 20 && level.round_number < 25)
 	{
 		self giveweapon( "tazer_knuckles_zm" );
 		self giveWeapon( "galil_zm" );
-		self maps/mp/zombies/_zm_perks::give_perk( "specialty_armorvest" );
-		self.score = 20000;
 	}
 	else if ( level.round_number >= 25)
 	{
 		self giveweapon( "tazer_knuckles_zm" );
 		self giveWeapon( "hamr_upgraded_zm" );
-		//self maps/mp/zombies/_zm_perks::give_perk( "specialty_armorvest" );
 		self giveAllPerks();
-		self.score = 25000;
 	}
 }
 setJuggernaut()
